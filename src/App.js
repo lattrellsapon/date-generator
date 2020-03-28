@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider } from './context';
+
+import Navbar from './components/layout/Navbar';
+import Dates from './components/dateIdeas/Dates';
+import DateGenerated from './components/dateIdeas/DateGenerated';
+import Footer from './components/layout/Footer';
+
 import './App.css';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider>
+      <Router>
+        <Navbar />
+        <div className='container'>
+          <Switch>
+            <Route exact path='/' component={Dates} />
+            <Route exact path='/date-suggestion' component={DateGenerated} />
+          </Switch>
+        </div>
+        <Footer />
+      </Router>
+    </Provider>
   );
 }
-
-export default App;
